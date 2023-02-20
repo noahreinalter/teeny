@@ -46,7 +46,12 @@ async function build() {
                 filter: (src, dest) => isNotHiddenFile(src) && !src.endsWith('.md'),
             })
     )
-    await safeExecute(async () => await fs.copy('static/', 'public/', { filter: (src, dest) => isNotHiddenFile(src) }))
+    await safeExecute(
+        async () =>
+            await fs.copy('static/', 'public/', {
+                filter: (src, dest) => isNotHiddenFile(src),
+            })
+    )
 
     await processDirectory('pages')
 }
@@ -192,12 +197,17 @@ function startServer(port) {
             }
             fs.readFile('public' + filePath, function (err, data) {
                 if (err) {
-                    res.writeHead(404)
-                    res.end('<h1>404: Page not found</h1>')
-                    return
+                    try {
+                        res.writeHead(404)
+                        let data = fs.readFileSync('public/404.html')
+                        res.end(data)
+                    } catch (err) {
+                        res.end('<h1>404: Page not found</h1>')
+                    }
+                } else {
+                    res.writeHead(200)
+                    res.end(data)
                 }
-                res.writeHead(200)
-                res.end(data)
             })
         })
         .listen(port)

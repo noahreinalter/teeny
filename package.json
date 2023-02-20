@@ -1,8 +1,8 @@
 {
-    "name": "teeny-cli",
-    "version": "0.2.0-beta",
+    "name": "teeny-site",
+    "version": "0.2.2",
     "description": "A very simple static site generator",
-    "author": "Yakko Majuri",
+    "author": "Yakko Majuri, Noah Reinalter",
     "main": "cli.js",
     "license": "MIT",
     "bin": {
@@ -10,13 +10,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/yakkomajuri/teeny.git"
+        "url": "https://github.com/noahreinalter/teeny"
     },
     "scripts": {
         "dev:build": "npm run dev && teeny build",
         "dev:develop": "npm run dev && teeny develop",
         "dev:init": "npm run dev && teeny init",
-        "dev": "rm teeny-* || true && npm pack && sudo npm i -g teeny-*.tgz -f",
+        "dev": "rm teeny-site* || true && npm pack && sudo npm i -g teeny-site*.tgz -f",
         "lint": "prettier --write ."
     },
     "devDependencies": {
@@ -28,5 +28,8 @@
         "fs-extra": "^10.0.1",
         "jsdom": "^19.0.0",
         "marked": "^4.0.12"
-    }
+    },
+    "files": [
+        "cli.js"
+    ]
 }
