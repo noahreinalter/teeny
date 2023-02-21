@@ -31,5 +31,19 @@
     },
     "files": [
         "cli.js"
+    ],
+    "keywords": [
+        "static-site-generator",
+        "static-site",
+        "ssg",
+        "website",
+        "blog",
+        "templates",
+        "generator",
+        "framework",
+        "html",
+        "markdown",
+        "liquid",
+        "teeny"
     ]
 }
