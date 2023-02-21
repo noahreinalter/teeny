@@ -7,6 +7,7 @@ const http = require('http')
 const chokidar = require('chokidar')
 const fm = require('front-matter')
 const path = require('path')
+const teenySite = require('./package.json')
 
 const templateUsageMap = new Map() // key = templatePath, value = Set of pagePaths
 const pageUsageMap = new Map() // key = pagePath, value = templatePath
@@ -15,6 +16,8 @@ const pageUsageMap = new Map() // key = pagePath, value = templatePath
 // body: "# My normal markdown ..."
 const scriptArgs = process.argv.slice(2)
 const command = scriptArgs[0]
+
+console.log('Teeny-Site ' + teenySite.version)
 
 switch (command) {
     case 'build':
