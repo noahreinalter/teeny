@@ -66,6 +66,8 @@ async function processDirectory(directoryPath) {
         if (isDirectory) {
             await processDirectory(`${directoryPath}/${element}`, processPagePromises)
             continue
+        } else if (!element.endsWith('.md')) {
+            continue
         }
         processPagePromises.push(processPage(`${directoryPath}/${element}`))
     }
