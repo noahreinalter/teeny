@@ -1,23 +1,22 @@
 #!/usr/bin/env node
 
-const { JSDOM } = require('jsdom')
-const fs = require('fs-extra')
-const { marked } = require('marked')
-const http = require('http')
-const chokidar = require('chokidar')
-const fm = require('front-matter')
-const path = require('path')
-const teenySite = require('./package.json')
+import { JSDOM } from 'jsdom'
+import fs from 'fs-extra'
+import { marked } from 'marked'
+import http from 'http'
+import chokidar from 'chokidar'
+import fm from 'front-matter'
+import path from 'path'
+
+let { version } = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)))
 
 const templateUsageMap = new Map() // key = templatePath, value = Set of pagePaths
 const pageUsageMap = new Map() // key = pagePath, value = templatePath
 
-// attributes: { template: "custom.html" }
-// body: "# My normal markdown ..."
 const scriptArgs = process.argv.slice(2)
 const command = scriptArgs[0]
 
-console.log('Teeny-Site ' + teenySite.version)
+console.log('Teeny-Site ' + version)
 
 switch (command) {
     case 'build':
@@ -105,20 +104,15 @@ async function develop(port) {
 }
 
 async function init() {
-    await safeExecute(async () => await fs.mkdir('pages/'))
-    await safeExecute(async () => await fs.mkdir('static/'))
-    await safeExecute(async () => await fs.mkdir('templates/'))
-
     const examplePage = `---\ntemplate: homepage\ntitle: Teeny page\nauthor: teeny\n---\n\n# Hello World\n`
-
     const exampleTemplate = `<html>\n    <head>\n        <title>{{ title }}</title>\n        <meta name="author" content="{{ author }}" />\n    </head>\n\n    <body>\n        <p>My first Teeny page</p>\n        <div id="page-content"></div>\n        <script type="text/javascript" src="main.js"></script>\n    </body>\n</html>\n`
     const defaultTemplate = `<html>\n    <body>\n        <div id="page-content"></div>\n    </body>\n</html>\n`
     const exampleStaticAssetJs = `console.log('hello world')\n`
 
-    await fs.writeFile('pages/index.md', examplePage)
-    await fs.writeFile('templates/homepage.html', exampleTemplate)
-    await fs.writeFile('templates/default.html', defaultTemplate)
-    await fs.writeFile('static/main.js', exampleStaticAssetJs)
+    writeToFileIfNotExists('pages/index.md', examplePage)
+    writeToFileIfNotExists('templates/homepage.html', exampleTemplate)
+    writeToFileIfNotExists('templates/default.html', defaultTemplate)
+    writeToFileIfNotExists('static/main.js', exampleStaticAssetJs)
 }
 
 async function processPage(pagePath) {
@@ -220,6 +214,14 @@ async function safeExecute(func) {
     try {
         await func()
     } catch {}
+}
+
+async function writeToFileIfNotExists(path, data) {
+    try {
+        await fs.outputFile(path, data, { flag: 'wx' })
+    } catch {
+        console.log(path + ' was not created because it already exists')
+    }
 }
 
 function isNotHiddenFile(src) {

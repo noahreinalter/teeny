@@ -1,10 +1,11 @@
 {
     "name": "teeny-site",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "A very simple static site generator",
     "author": "Yakko Majuri, Noah Reinalter",
     "main": "cli.js",
     "license": "MIT",
+    "type": "module",
     "bin": {
         "teeny": "cli.js"
     },
