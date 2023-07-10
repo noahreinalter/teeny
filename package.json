@@ -1,6 +1,6 @@
 {
     "name": "teeny-site",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "description": "A very simple static site generator",
     "author": "Yakko Majuri, Noah Reinalter",
     "main": "cli.js",
@@ -21,12 +21,12 @@
         "lint": "prettier --write ."
     },
     "devDependencies": {
-        "prettier": "^2.4.1"
+        "prettier": "^3.0.0"
     },
     "dependencies": {
         "chokidar": "^3.5.3",
         "front-matter": "^4.0.2",
-        "fs-extra": "^11.1.0",
+        "fs-extra": "^11.1.1",
         "jsdom": "^22.1.0",
         "marked": "^5.1.1"
     },

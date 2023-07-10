@@ -144,7 +144,7 @@ async function processPage(pagePath) {
     }
 
     const dom = new JSDOM(templateString)
-    const parsedHtml = marked.parse(markdown)
+    const parsedHtml = marked.parse(markdown, { headerIds: false, mangle: false })
     const document = dom.window.document
 
     const pageContentElement = document.getElementById('page-content')
