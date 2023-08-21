@@ -28,7 +28,7 @@
         "front-matter": "^4.0.2",
         "fs-extra": "^11.1.1",
         "jsdom": "^22.1.0",
-        "marked": "^5.1.1"
+        "marked": "^7.0.4"
     },
     "files": [
         "cli.js"
