@@ -27,7 +27,7 @@
         "chokidar": "^3.5.3",
         "front-matter": "^4.0.2",
         "fs-extra": "^11.1.1",
-        "jsdom": "^24.0.0",
+        "jsdom": "^25.0.0",
         "marked": "^14.1.0"
     },
     "files": [
