@@ -1,6 +1,6 @@
 {
     "name": "teeny-site",
-    "version": "0.3.11",
+    "version": "0.3.12",
     "description": "A very simple static site generator",
     "author": "Yakko Majuri, Noah Reinalter",
     "main": "cli.js",
@@ -48,6 +48,6 @@
         "teeny"
     ],
     "engines": {
-        "node": ">=22.0.0"
+        "node": ">=24.0.0"
     }
 }
